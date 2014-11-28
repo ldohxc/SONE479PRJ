@@ -1,5 +1,7 @@
 import sys
 import math
+from operator import itemgetter
+import Afinn
 import Tokenizer
 import Normalizer
 
@@ -7,9 +9,9 @@ def error(message):
     sys.stderr.write("error: %s\n" % message)
     sys.exit(1)
     
-def loadDictionary():
+def loadDictionary(prefix):
     dictionary = {}
-    with open('../invertedIndex/dictionary', 'r') as d:
+    with open('../invertedIndex/' + prefix + '/dictionary', 'r') as d:
         for line in d:
             token = line.split(':')[0]
             dictionary[token] = {}
@@ -18,10 +20,10 @@ def loadDictionary():
     d.close()
     return dictionary
 
-def loadDocInfo():
+def loadDocInfo(prefix):
     docInfo = {}
     totalNumberOfToken = 0
-    with open('../invertedIndex/docInfo', 'r') as di:
+    with open('../invertedIndex/' + prefix + '/PageInfo', 'r') as di:
         for line in di:
             docId = int(line.split(':')[0])
             docLength = int(line.split(':')[1])
@@ -32,15 +34,36 @@ def loadDocInfo():
     docInfo['average'] = totalNumberOfToken/totalNumberOfDoc
     return docInfo
 
-def loadDocContent():
+def loadDocContent(prefix):
     docContents = {}
-    with open('../invertedIndex/docContent', 'r') as dc:
+    with open('../invertedIndex/' + prefix + '/PageContent', 'r') as dc:
         # [:-13] removes the last docContentEnd
         contents = dc.read()[:-13].split('docContentEnd')
         for content in contents:
             docContents[int(content.split('docContentStart')[0])] = content.split('docContentStart')[1]
     dc.close()
     return docContents
+
+def loadDocId(prefix):
+    docIds = {}
+    with open('../invertedIndex/' + prefix + '/PageId', 'r') as di:
+        for line in di:
+            docId = int(line.split(':')[0])
+            docFolderPath = line.split(':')[1].strip()
+            docIds[docId] = docFolderPath
+    di.close()
+    return docIds
+
+def loadDocCategory(docIds, docContents):
+    docCategory = {}
+    for key in docIds.keys():
+        folders = docIds.get(key).split('/')
+        if len(folders) > 1:
+            if docCategory.has_key(folders[0]):
+                docCategory[folders[0]].append(Afinn.sentiment(docContents.get(key)))
+            else:
+                docCategory[folders[0]] = [Afinn.sentiment(docContents.get(key))]
+    return docCategory
 
 def normalizeToken(word):
     word = Normalizer.cleanUp(word)
@@ -172,39 +195,105 @@ def processQuery(query, dictionary, docInfo):
     
 def main():
     
-    dictionary = loadDictionary()
-    docInfo = loadDocInfo()
-    docContents = loadDocContent()
-    numberOfDisplay = -1 
-    query =  sys.argv[1]
+    prefix = ''
+
+    dataBase = 'start'
+    while dataBase != 'c' and dataBase != 'm':
+        dataBase = raw_input('Please choose the data to work with (c for Concordia, m for McGill): \n')
+        if dataBase == 'c':
+            prefix = 'Concordia'
+        elif dataBase == 'm':
+            prefix = 'McGill'
+    print 'You selected ' + prefix + '\n'
     
-    if len(sys.argv) == 3:
-        numberOfDisplay = int(sys.argv[2])
-        
-    result = processQuery(query, dictionary, docInfo)
+    # load all the data
+    dictionary = loadDictionary(prefix)
+    docInfo = loadDocInfo(prefix)
+    docContents = loadDocContent(prefix)
+    docIds = loadDocId(prefix)
+    docCategory = loadDocCategory(docIds, docContents)
     
-    if len(result) == 0:
-        print "No article is found."
-    else:
-        numberOfResult = sum([len(v) for k,v in result.iteritems()])
-        if numberOfDisplay < 0 or numberOfDisplay > numberOfResult:
-            numberOfDisplay = numberOfResult
-        print "There are " + str(numberOfResult) + " articles matching the query \"" + query + "\"."
-        # sort the result by its ranking score
-        counter = 0
-        innerBroken = False
-        for score in sorted(result.keys(), reverse=True):
-            for doc in result[score]:
-                if counter < numberOfDisplay:
-                    print "document: " + str(doc) + " (" + str(score) + ") " + "\n" + docContents.get(doc)
+    option = 'start'
+    while option != 'q':
+        option = raw_input('Please choose one of the options (type the option number 1 or 2, and q for exit): \n 1. Search \n 2. Sentiment \n')
+        # For search
+        if option == '1':
+            query = raw_input('Please type your query (q for exit): \n')
+            while query != 'q':
+                result = processQuery(query, dictionary, docInfo)
+                if len(result) == 0:
+                    print "No article is found."
                 else:
-                    innerBroken = True
-                    break
-                counter += 1
-            if innerBroken == True:
-                break
-                
-                
+                    numberOfResult = sum([len(v) for k,v in result.iteritems()])
+                    print "There are " + str(numberOfResult) + " articles matching the query \"" + query + "\". \n"
+                    while True:
+                        try:
+                            numberOfDisplay = int(raw_input('How many documents you want to see:(the most relevant will be displayed first) \n'))    
+                        except ValueError:
+                            continue
+                        else:
+                            if numberOfDisplay < 0 or numberOfDisplay > numberOfResult:
+                                numberOfDisplay = numberOfResult
+                                
+                            print numberOfDisplay
+                            # sort the result by its ranking score
+                            counter = 0
+                            innerBroken = False
+                            for score in sorted(result.keys(), reverse=True):
+                                for doc in result[score]:
+                                    if counter < numberOfDisplay:
+                                        print "Page: " + docIds.get(doc) + " (" + str(score) + ") " + "\n" + docContents.get(doc) + '\n'
+                                    else:
+                                        innerBroken = True
+                                        break
+                                    counter += 1
+                                if innerBroken == True:
+                                    break
+                            break 
+                query = raw_input('Please type your new query (q for exit): \n')
+        # For sentiment
+        elif option == '2':
+            subOpt = 'start'
+            while subOpt != 'q':
+                subOpt = raw_input('Please choose one of the options (type the option number 1 2, 3, or 4, and q for exit): \n' +
+                                   ' 1. Rank the categories by sentiment of their web documents \n' +
+                                   ' 2. Positive list \n' +
+                                   ' 3. Neutral list \n' +
+                                   ' 4. Negative list \n')
+                if subOpt == '1':
+                    temCategory = []
+                    for cat in docCategory.keys():
+                        sentimentScores = docCategory.get(cat)
+                        temCategory.append((cat, sum(sentimentScores)/len(sentimentScores), sum(sentimentScores)))
+                    for score in sorted(temCategory, key=lambda x:x[1], reverse=True):
+                        print score[0] + ': ' + str(score[1]) + '/' + str(score[2]) 
+                elif subOpt == '2':
+                    count = 0
+                    for cat in docCategory.keys():
+                        sentimentScores = docCategory.get(cat)
+                        if sum(sentimentScores) > 0:
+                            print cat 
+                            count += 1
+                    if count == 0:
+                        print 'There is no one positive.'
+                elif subOpt == '3':
+                    count = 0
+                    for cat in docCategory.keys():
+                        sentimentScores = docCategory.get(cat)
+                        if sum(sentimentScores) == 0:
+                            print cat 
+                    if count == 0:
+                        print 'There is no one neutral.'
+                elif subOpt == '4':
+                    count = 0
+                    for cat in docCategory.keys():
+                        sentimentScores = docCategory.get(cat)
+                        if sum(sentimentScores) < 0:
+                            print cat 
+                    if count == 0:
+                        print 'There is no one negative.'
+                print '\n'
+    print 'Thanks for using the system.'      
 
 if __name__ == "__main__":
     main()

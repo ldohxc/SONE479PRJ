@@ -1,51 +1,113 @@
 from bs4 import BeautifulSoup
+import os
 import Tokenizer 
 import Normalizer
 
-def getAllTokens(soup):    
-    invertedIndex = {}
-    fInfo = open('../invertedIndex/docInfo', 'a')
-    fContent = open('../invertedIndex/docContent', 'a')
-    # Create inverted index, loop through all articles in one file
-    for doc in soup.find_all('reuters'):
-        docId = int(doc['newid'].encode('utf8'))
-        tokenCounter = 0
-        if doc.body is not None:
-            content = doc.body.text
-            fContent.write (str(docId) + 'docContentStart' + content.encode('utf8') + 'docContentEnd')
-            tokens = Tokenizer.tokenise(content)
-            for token in tokens:
-                # Normalization
-                token = Normalizer.cleanUp(token)
-                token = Normalizer.caseFolding(token)
-                token = Normalizer.removeStopWord(token)
-                token = Normalizer.stemming(token)
-                if token != '':
-                    tokenCounter += 1
-                    # Add to the postings list if the word exists
-                    if invertedIndex.has_key(token):
-                        if invertedIndex[token].has_key(docId):
-                            tf = invertedIndex[token][docId]
-                            invertedIndex[token][docId] = tf +1
-                        else:
-                            invertedIndex[token][docId] = 1
-                    else:
-                        invertedIndex[token] = {docId:1}
-        fInfo.write (str(docId) + ":" + str(tokenCounter) +'\n')
-    fInfo.close()
-    fContent.close()                
+PAGEID = 1
+
+def incrementPageId():
+    global PAGEID
+    PAGEID += 1
+
+def parseAllHtml(resourcesPath, invertedIndex):
+    # Loop through everything in the directory
+    for f in os.listdir(resourcesPath):
+        pathname = os.path.join(resourcesPath, f)
+        # If it is a folder, loop through the folder
+        if os.path.isdir(pathname):
+            invertedIndex = parseAllHtml(pathname, invertedIndex)
+        # If is a file, parse it.
+        else:
+            invertedIndex = parseSingleHtml(pathname, invertedIndex)
+            incrementPageId()
     return invertedIndex
 
-def writeBlockToDisk(suffix):
-    resourceFilePath = '../resources/reut2-' + suffix + '.sgm'
-    #read and parse docutments
-    document = open(resourceFilePath)
-    soup = BeautifulSoup(document, 'html.parser')
+def parseSingleHtml(filePath, invertedIndex):
+
+    newInvertedIndex = invertedIndex
+    # Read and parse page, decode used to handle special characters
+    page = open(filePath).read().decode('utf-8', 'ignore')
+    soup = BeautifulSoup(page, 'html.parser')
+    # Kill all script and style elements
+    for script in soup(["script", "style"]):
+        script.extract()    # rip it out
+    if soup.body is not None:
+        # Add space for some between some tag, such as <li>   
+        body = " ".join(soup.body.strings)
+        # Remove all extra space from the body and concatenate each line
+        content = ""
+        for line in body.splitlines():
+            line = line.strip()
+            if line:
+                content += line + " "
+        content = content[:-1]
+        # Construct a id for each html page
+        prefix = filePath.split('/')[2]
+        pageFolderPath = '/'.join(filePath.split('/')[3:])
+        print pageFolderPath
+        #
+        newInvertedIndex = appendAllTokens(prefix, content, invertedIndex)
+        # Store the page content in one file for sentiment analysis
+        appendPageContent(prefix, content)
+        # Store the map between page id and page folder path
+        appendPageId(prefix, pageFolderPath)
+    return newInvertedIndex
+
+def appendAllTokens(prefix, content, invertedIndex): 
+    tokenCounter = 0
+    tokens = Tokenizer.tokenise(content)
+    for token in tokens:
+        # Normalization
+        token = Normalizer.cleanUp(token)
+        token = Normalizer.caseFolding(token)
+        token = Normalizer.removeStopWord(token)
+        token = Normalizer.stemming(token)
+        if token != '':
+            tokenCounter += 1
+            # Add to the postings list if the word exists
+            if invertedIndex.has_key(token):
+                if invertedIndex[token].has_key(PAGEID):
+                    tf = invertedIndex[token][PAGEID]
+                    invertedIndex[token][PAGEID] = tf +1
+                else:
+                    invertedIndex[token][PAGEID] = 1
+            else:
+                invertedIndex[token] = {PAGEID:1} 
+    # Store the number of tokens for each page in one file for tf-idf calculation
+    appendPageInfo(prefix, tokenCounter)
     
-    invertedIndex = getAllTokens(soup)
+    return invertedIndex
     
+def appendPageContent(prefix, content):
+    directory = '../invertedIndex/' + prefix
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    fContent = open(directory + '/PageContent', 'a')
+    fContent.write (str(PAGEID) + 'docContentStart' + content.encode('utf8') + 'docContentEnd\n')
+    fContent.close() 
+
+def appendPageInfo(prefix, tokenCounter):
+    directory = '../invertedIndex/' + prefix
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    fInfo = open(directory + '/PageInfo', 'a')
+    fInfo.write (str(PAGEID) + ":" + str(tokenCounter) +'\n')
+    fInfo.close() 
+
+def appendPageId(prefix, pageFolderPath):
+    directory = '../invertedIndex/' + prefix
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    fInfo = open(directory + '/PageId', 'a')
+    fInfo.write (str(PAGEID) + ":" + pageFolderPath +'\n')
+    fInfo.close()
+
+def writeToDictionary(prefix, invertedIndex):
+    directory = '../invertedIndex/' + prefix
+    if not os.path.exists(directory):
+        os.makedirs(directory)        
     #save the inverted index into disk
-    f = open('../invertedIndex/index' + suffix, 'w')
+    f = open(directory + '/dictionary', 'w')
     for k in sorted(invertedIndex):#sort the inverted index when writing to disk
         # add encode('utf8') to handle UnicodeEncodeError: 'ascii' codec can't encode character
         ss = ''
@@ -53,9 +115,22 @@ def writeBlockToDisk(suffix):
             s = str(key) + '|' + str(value) + ', '
             ss += s
         f.write ((k + ":" + ss[:-2] +'\n').encode('utf8'))
-    f.close()      
-    print "Finish constructing inverted index for reut2-" + suffix 
-    
+    f.close() 
+
+def storeCategories(prefix, resourcesPath):
+    # Loop through everything in the directory
+    directory = '../invertedIndex/' + prefix
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    fCat = open(directory + '/PageCategory', 'w')
+    for f in os.listdir(resourcesPath):
+        pathname = os.path.join(resourcesPath, f)
+        # If it is a folder, loop through the folder
+        if os.path.isdir(pathname):
+            print f
+            fCat.write (f + '\n')
+    fCat.close()    
+       
 # get dictionary word from the dictionary line
 def getIndexWords(indexFileLines):
     indexWords = []
@@ -129,13 +204,14 @@ def main():
         
     print "Start constructing inverted index"
     
-    numberOfBlocks = 22
+    resourcesPath = '../resources/McGill'
+    invertedIndex = {}  
+    prefix = resourcesPath.split('/')[2]
     
-    for num in range(numberOfBlocks):
-        suffix = '%0*d' % (3, num)
-        writeBlockToDisk(suffix)
-    
-    mergeBlocks(numberOfBlocks)
+    #storeCategories(prefix, resourcesPath)
+    invertedIndex = parseAllHtml(resourcesPath, invertedIndex)
+           
+    writeToDictionary(prefix, invertedIndex)
     
     print "Finish constructing all inverted index"
     
