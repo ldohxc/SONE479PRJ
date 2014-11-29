@@ -351,7 +351,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/computer-science-software-engineering/student-life/student-association.html">
+                                                    <a tabindex="-1" href="../student-life/student-association.html">
                                                         Student associations
                                                     </a>
                                                 </li>
@@ -674,8 +674,8 @@ jQuery('document').ready(function() {
                             <li class=""><a href="../research.html">Research</a></li>
                             <li class=""><a href="../services-facilities.html">Facilities & services</a></li>
                             <li class=""><a href="../student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/computer-science-software-engineering/news.html">News & events</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/computer-science-software-engineering/contact.html">Contact us</a></li></ul> 
+                            <li class=""><a href="../news.html">News & events</a></li>
+                            <li class=""><a href="../contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -776,7 +776,7 @@ jQuery('document').ready(function() {
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -806,4 +806,26 @@ jQuery('document').ready(function() {
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        

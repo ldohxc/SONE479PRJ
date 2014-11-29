@@ -300,7 +300,7 @@
     
                     <li class="dropdown active">
                         
-                            <a href="http://www.concordia.ca/encs/computer-science-software-engineering/research.html" role="button" class="dropdown-toggle" data-toggle="">Research</a>
+                            <a href="../research.html" role="button" class="dropdown-toggle" data-toggle="">Research</a>
                             <div>
                                     <div class="dropdown-menu">
                                         <ul>
@@ -310,22 +310,22 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/computer-science-software-engineering/research/centre.html">
+                                                    <a tabindex="-1" href="centre.html">
                                                         Research centre (CENPARMI)
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/computer-science-software-engineering/research/industry-sponsors.html">
+                                                    <a tabindex="-1" href="industry-sponsors.html">
                                                         Industry sponsors
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/computer-science-software-engineering/research/grants-funding.html">
+                                                    <a tabindex="-1" href="grants-funding.html">
                                                         Grants &amp; funding
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/computer-science-software-engineering/research/visiting-researchers.html">
+                                                    <a tabindex="-1" href="visiting-researchers.html">
                                                         Visiting researchers
                                                     </a>
                                                 </li>
@@ -336,12 +336,12 @@
     
                     <li class="dropdown ">
                         
-                            <a href="http://www.concordia.ca/encs/computer-science-software-engineering/services-facilities.html" role="button">Facilities &amp; services</a>
+                            <a href="../services-facilities.html" role="button">Facilities &amp; services</a>
                     </li>
     
                     <li class="dropdown ">
                         
-                            <a href="http://www.concordia.ca/encs/computer-science-software-engineering/student-life.html" role="button" class="dropdown-toggle" data-toggle="">Student life</a>
+                            <a href="../student-life.html" role="button" class="dropdown-toggle" data-toggle="">Student life</a>
                             <div>
                                     <div class="dropdown-menu">
                                         <ul>
@@ -351,7 +351,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/computer-science-software-engineering/student-life/student-association.html">
+                                                    <a tabindex="-1" href="../student-life/student-association.html">
                                                         Student associations
                                                     </a>
                                                 </li>
@@ -428,7 +428,7 @@
 	        </li>
 	        &nbsp;&gt;&nbsp;
 	        <li>
-                <a href="http://www.concordia.ca/encs/computer-science-software-engineering/research.html" onclick="CQ_Analytics.record({event:'followBreadcrumb',values: { breadcrumbPath: '/content/concordia/en/encs/computer-science-software-engineering/research' },collect: false,options: { obj: this },componentPath: 'concordia/components/breadcrumb'})">
+                <a href="../research.html" onclick="CQ_Analytics.record({event:'followBreadcrumb',values: { breadcrumbPath: '/content/concordia/en/encs/computer-science-software-engineering/research' },collect: false,options: { obj: this },componentPath: 'concordia/components/breadcrumb'})">
                     Research
                 </a>
 	        </li>
@@ -768,11 +768,11 @@ jQuery('document').ready(function() {
         <ul class="">
                             <li class=""><a href="../about.html">About CSSE</a></li>
                             <li class=""><a href="../programs.html">Programs</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/computer-science-software-engineering/research.html">Research</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/computer-science-software-engineering/services-facilities.html">Facilities & services</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/computer-science-software-engineering/student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/computer-science-software-engineering/news.html">News & events</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/computer-science-software-engineering/contact.html">Contact us</a></li></ul> 
+                            <li class=""><a href="../research.html">Research</a></li>
+                            <li class=""><a href="../services-facilities.html">Facilities & services</a></li>
+                            <li class=""><a href="../student-life.html">Student life</a></li>
+                            <li class=""><a href="../news.html">News & events</a></li>
+                            <li class=""><a href="../contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -873,7 +873,7 @@ jQuery('document').ready(function() {
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -903,4 +903,26 @@ jQuery('document').ready(function() {
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

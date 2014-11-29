@@ -1,6 +1,5 @@
 import sys
 import math
-from operator import itemgetter
 import Afinn
 import Tokenizer
 import Normalizer
@@ -54,15 +53,21 @@ def loadDocId(prefix):
     di.close()
     return docIds
 
-def loadDocCategory(docIds, docContents):
+def loadDocSentiment(docContents):
+    docSentiment = {}
+    for key in docContents.keys():
+        docSentiment[key] = Afinn.sentiment(docContents.get(key))
+    return docSentiment
+
+def loadDocCategory(docIds, docSentiment):
     docCategory = {}
     for key in docIds.keys():
         folders = docIds.get(key).split('/')
         if len(folders) > 1:
             if docCategory.has_key(folders[0]):
-                docCategory[folders[0]].append(Afinn.sentiment(docContents.get(key)))
+                docCategory[folders[0]].append(docSentiment.get(key))
             else:
-                docCategory[folders[0]] = [Afinn.sentiment(docContents.get(key))]
+                docCategory[folders[0]] = [docSentiment.get(key)]
     return docCategory
 
 def normalizeToken(word):
@@ -198,12 +203,14 @@ def main():
     prefix = ''
 
     dataBase = 'start'
-    while dataBase != 'c' and dataBase != 'm':
-        dataBase = raw_input('Please choose the data to work with (c for Concordia, m for McGill): \n')
+    while dataBase != 'c' and dataBase != 'm' and dataBase != 'ma':
+        dataBase = raw_input('Please choose the data to work with (c for Concordia, m for McGill, ma for McGillAlt): \n')
         if dataBase == 'c':
             prefix = 'Concordia'
         elif dataBase == 'm':
             prefix = 'McGill'
+        elif dataBase == 'ma':
+            prefix = 'McGillAlt'
     print 'You selected ' + prefix + '\n'
     
     # load all the data
@@ -211,7 +218,8 @@ def main():
     docInfo = loadDocInfo(prefix)
     docContents = loadDocContent(prefix)
     docIds = loadDocId(prefix)
-    docCategory = loadDocCategory(docIds, docContents)
+    docSentiment = loadDocSentiment(docContents)
+    docCategory = loadDocCategory(docIds, docSentiment)
     
     option = 'start'
     while option != 'q':
@@ -264,34 +272,65 @@ def main():
                     temCategory = []
                     for cat in docCategory.keys():
                         sentimentScores = docCategory.get(cat)
+                        #print cat+':'+str(len(sentimentScores))
                         temCategory.append((cat, sum(sentimentScores)/len(sentimentScores), sum(sentimentScores)))
                     for score in sorted(temCategory, key=lambda x:x[1], reverse=True):
                         print score[0] + ': ' + str(score[1]) + '/' + str(score[2]) 
+                    print '\n'
                 elif subOpt == '2':
                     count = 0
                     for cat in docCategory.keys():
-                        sentimentScores = docCategory.get(cat)
-                        if sum(sentimentScores) > 0:
-                            print cat 
+                        sentimentScore = sum(docCategory.get(cat))
+                        if sentimentScore > 0:
+                            print 'Category: ' + cat + '(' + str(sentimentScore) + ')' 
                             count += 1
                     if count == 0:
-                        print 'There is no one positive.'
+                        print 'There is no category that is positive.\n'
+                    else:
+                        count = 0
+                        print '\n'
+                    for key in docSentiment.keys():
+                        if docSentiment.get(key) > 0:
+                            print 'Document: ' + docIds.get(key) + '(' + str(docSentiment.get(key)) + ')'
+                            count += 1
+                    if count == 0:
+                        print 'There is no document that is positive.'
                 elif subOpt == '3':
                     count = 0
                     for cat in docCategory.keys():
-                        sentimentScores = docCategory.get(cat)
-                        if sum(sentimentScores) == 0:
-                            print cat 
+                        sentimentScore = sum(docCategory.get(cat))
+                        if sentimentScore == 0:
+                            print 'Category: ' + cat + '(' + str(sentimentScore) + ')' 
+                            count += 1
                     if count == 0:
-                        print 'There is no one neutral.'
+                        print 'There is no category that is neutral.\n'
+                    else:
+                        count = 0
+                        print '\n'
+                    for key in docSentiment.keys():
+                        if docSentiment.get(key) == 0:
+                            print 'Document: ' + docIds.get(key) + '(' + str(docSentiment.get(key)) + ')'
+                            count += 1
+                    if count == 0:
+                        print 'There is no document that is neutral.'
                 elif subOpt == '4':
                     count = 0
                     for cat in docCategory.keys():
-                        sentimentScores = docCategory.get(cat)
-                        if sum(sentimentScores) < 0:
-                            print cat 
+                        sentimentScore = sum(docCategory.get(cat))
+                        if sentimentScore < 0:
+                            print 'Category: ' + cat + '(' + str(sentimentScore) + ')' 
+                            count += 1
                     if count == 0:
-                        print 'There is no one negative.'
+                        print 'There is no category that is negative.\n'
+                    else:
+                        count = 0
+                        print '\n'
+                    for key in docSentiment.keys():
+                        if docSentiment.get(key) < 0:
+                            print 'Document: ' + docIds.get(key) + '(' + str(docSentiment.get(key)) + ')'
+                            count += 1
+                    if count == 0:
+                        print 'There is no document that is negative.'
                 print '\n'
     print 'Thanks for using the system.'      
 

@@ -320,7 +320,7 @@
     
                     <li class="dropdown active">
                         
-                            <a href="http://www.concordia.ca/encs/info-systems-eng/research.html" role="button" class="dropdown-toggle" data-toggle="">Research</a>
+                            <a href="../research.html" role="button" class="dropdown-toggle" data-toggle="">Research</a>
                             <div>
                                     <div class="dropdown-menu">
                                         <ul>
@@ -341,17 +341,17 @@
     
                     <li class="dropdown ">
                         
-                            <a href="http://www.concordia.ca/encs/info-systems-eng/facilities-services.html" role="button">Facilities &amp; services</a>
+                            <a href="../facilities-services.html" role="button">Facilities &amp; services</a>
                     </li>
     
                     <li class="dropdown ">
                         
-                            <a href="http://www.concordia.ca/encs/info-systems-eng/student-life.html" role="button" class="dropdown-toggle" data-toggle="">Student life</a>
+                            <a href="../student-life.html" role="button" class="dropdown-toggle" data-toggle="">Student life</a>
                             <div>
                                     <div class="dropdown-menu">
                                         <ul>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/info-systems-eng/student-life/associations.html">
+                                                    <a tabindex="-1" href="../student-life/associations.html">
                                                         Student &amp; Professional Associations
                                                     </a>
                                                 </li>
@@ -428,7 +428,7 @@
 	        </li>
 	        &nbsp;&gt;&nbsp;
 	        <li>
-                <a href="http://www.concordia.ca/encs/info-systems-eng/research.html" onclick="CQ_Analytics.record({event:'followBreadcrumb',values: { breadcrumbPath: '/content/concordia/en/encs/info-systems-eng/research' },collect: false,options: { obj: this },componentPath: 'concordia/components/breadcrumb'})">
+                <a href="../research.html" onclick="CQ_Analytics.record({event:'followBreadcrumb',values: { breadcrumbPath: '/content/concordia/en/encs/info-systems-eng/research' },collect: false,options: { obj: this },componentPath: 'concordia/components/breadcrumb'})">
                     Research
                 </a>
 	        </li>
@@ -723,7 +723,7 @@ networking, wireless sensor networking)</li>
 		    <ul>
 		        
                             <li>
-					            <a href="http://www.concordia.ca/encs/mechanical-industrial/facilities-services.html">
+					            <a href="../../mechanical-industrial/facilities-services.html">
 						            <i class="sprites-icon-arrow-right-black"></i>
 						            Research Labs
 						        </a>
@@ -776,11 +776,11 @@ networking, wireless sensor networking)</li>
         <ul class="">
                             <li class=""><a href="../about.html">About</a></li>
                             <li class=""><a href="../programs.html">Programs</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/research.html">Research</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/facilities-services.html">Facilities & Services</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/news.html">News & Events</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/contact.html">Contact us</a></li></ul> 
+                            <li class=""><a href="../research.html">Research</a></li>
+                            <li class=""><a href="../facilities-services.html">Facilities & Services</a></li>
+                            <li class=""><a href="../student-life.html">Student life</a></li>
+                            <li class=""><a href="../news.html">News & Events</a></li>
+                            <li class=""><a href="../contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -799,7 +799,7 @@ networking, wireless sensor networking)</li>
         <b>Quick links</b>    
     
         <ul class="">
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/students.html">Current students</a></li></ul> 
+                            <li class=""><a href="../students.html">Current students</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -886,7 +886,7 @@ networking, wireless sensor networking)</li>
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -916,4 +916,26 @@ networking, wireless sensor networking)</li>
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  

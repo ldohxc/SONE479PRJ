@@ -429,13 +429,13 @@
 	        </li>
 	        &nbsp;&gt;&nbsp;
 	        <li>
-                <a href="http://www.concordia.ca/encs/bcee/news.html" onclick="CQ_Analytics.record({event:'followBreadcrumb',values: { breadcrumbPath: '/content/concordia/en/encs/bcee/news' },collect: false,options: { obj: this },componentPath: 'concordia/components/breadcrumb'})">
+                <a href="../news.html" onclick="CQ_Analytics.record({event:'followBreadcrumb',values: { breadcrumbPath: '/content/concordia/en/encs/bcee/news' },collect: false,options: { obj: this },componentPath: 'concordia/components/breadcrumb'})">
                     News & events
                 </a>
 	        </li>
 	        &nbsp;&gt;&nbsp;
 	        <li>
-                <a href="http://www.concordia.ca/encs/bcee/news/notices.html" onclick="CQ_Analytics.record({event:'followBreadcrumb',values: { breadcrumbPath: '/content/concordia/en/encs/bcee/news/notices' },collect: false,options: { obj: this },componentPath: 'concordia/components/breadcrumb'})">
+                <a href="notices.html" onclick="CQ_Analytics.record({event:'followBreadcrumb',values: { breadcrumbPath: '/content/concordia/en/encs/bcee/news/notices' },collect: false,options: { obj: this },componentPath: 'concordia/components/breadcrumb'})">
                     Notices
                 </a>
 	        </li>
@@ -781,7 +781,7 @@ $(document).ready(function() {
                             <li class=""><a href="../research.html">Research</a></li>
                             <li class=""><a href="../facilities-services.html">Facilities & Services</a></li>
                             <li class=""><a href="../student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/bcee/news.html">News & Events</a></li>
+                            <li class=""><a href="../news.html">News & Events</a></li>
                             <li class=""><a href="../contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
@@ -888,7 +888,7 @@ $(document).ready(function() {
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -918,4 +918,26 @@ $(document).ready(function() {
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                     

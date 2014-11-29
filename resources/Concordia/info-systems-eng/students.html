@@ -770,7 +770,7 @@ Form to be attached to assignments, projects, and reports for grading.</li>
 
 
 
-<a style="margin-bottom:10px;" class="btn btn-large btn-block bg-green" href="http://www.concordia.ca/encs/info-systems-eng/programs/co-op.html" target="_self">Co-op</a>
+<a style="margin-bottom:10px;" class="btn btn-large btn-block bg-green" href="programs/co-op.html" target="_self">Co-op</a>
 
 </div>
 <div class="parbase button section">
@@ -916,7 +916,7 @@ Form to be attached to assignments, projects, and reports for grading.</li>
                             <li class=""><a href="research.html">Research</a></li>
                             <li class=""><a href="facilities-services.html">Facilities & Services</a></li>
                             <li class=""><a href="student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/news.html">News & Events</a></li>
+                            <li class=""><a href="news.html">News & Events</a></li>
                             <li class=""><a href="contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
@@ -1023,7 +1023,7 @@ Form to be attached to assignments, projects, and reports for grading.</li>
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -1053,4 +1053,26 @@ Form to be attached to assignments, projects, and reports for grading.</li>
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                              

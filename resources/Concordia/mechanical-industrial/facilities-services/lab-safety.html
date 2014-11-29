@@ -253,7 +253,7 @@
                                     <div class="dropdown-menu">
                                         <ul>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/mechanical-industrial/about/faculty.html">
+                                                    <a tabindex="-1" href="../about/faculty.html">
                                                         Faculty members
                                                     </a>
                                                 </li>
@@ -295,7 +295,7 @@
     
                     <li class="dropdown ">
                         
-                            <a href="http://www.concordia.ca/encs/mechanical-industrial/research.html" role="button">Research</a>
+                            <a href="../research.html" role="button">Research</a>
                     </li>
     
                     <li class="dropdown active">
@@ -326,12 +326,12 @@
     
                     <li class="dropdown ">
                         
-                            <a href="http://www.concordia.ca/encs/mechanical-industrial/student-life.html" role="button" class="dropdown-toggle" data-toggle="">Student life</a>
+                            <a href="../student-life.html" role="button" class="dropdown-toggle" data-toggle="">Student life</a>
                             <div>
                                     <div class="dropdown-menu">
                                         <ul>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/mechanical-industrial/student-life/student-association.html">
+                                                    <a tabindex="-1" href="../student-life/student-association.html">
                                                         Student &amp; Professional Associations
                                                     </a>
                                                 </li>
@@ -790,11 +790,11 @@
         <ul class="">
                             <li class=""><a href="../about.html">About</a></li>
                             <li class=""><a href="../programs.html">Programs</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/mechanical-industrial/research.html">Research</a></li>
+                            <li class=""><a href="../research.html">Research</a></li>
                             <li class=""><a href="../facilities-services.html">Facilities & services</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/mechanical-industrial/student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/mechanical-industrial/news.html">News & Events</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/mechanical-industrial/contact.html">Contact us</a></li></ul> 
+                            <li class=""><a href="../student-life.html">Student life</a></li>
+                            <li class=""><a href="../news.html">News & Events</a></li>
+                            <li class=""><a href="../contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -814,8 +814,8 @@
     
         <ul class="">
                             <li class=""><a href="http://www.concordia.ca/admissions.html">Admissions</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/mechanical-industrial/students/undergraduate.html">Current Undergraduate Students</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/mechanical-industrial/students/graduate.html">Current Graduate Students</a></li>
+                            <li class=""><a href="../students/undergraduate.html">Current Undergraduate Students</a></li>
+                            <li class=""><a href="../students/graduate.html">Current Graduate Students</a></li>
                             <li class=""><a href="http://www.concordia.ca/encs/student-life/sas.html">Student Academic Services</a></li>
                             <li class=""><a href="../about/jobs.html">Job Opportunities</a></li></ul> 
 </div></div>
@@ -904,7 +904,7 @@
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -934,4 +934,26 @@
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

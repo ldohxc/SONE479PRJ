@@ -557,7 +557,7 @@
 
 <div class="rte">
 <ul>
-<li><a adhocenable="false" href="http://www.concordia.ca/academics/graduate/calendar/current/encs/enineering-courses.html">Course descriptions</a></li>
+<li><a adhocenable="false" href="http://www.concordia.ca/academics/graduate/calendar/current/encs/engineering-courses.html">Course descriptions</a></li>
 <li><a></a><a adhocenable="false" href="http://www.concordia.ca/encs/students/course-schedules/fall-2014-2015.html">Course schedules (ENCS)</a></li>
 <li><a adhocenable="false" href="http://www.cs.concordia.ca/assets/content/directory/DoctoralGuidelinesAndMilestones.pdf" target="_blank">PhD critical stages &amp; milestones</a></li>
 </ul>
@@ -727,8 +727,8 @@ S-EV 3.152, ext. 3043</p>
                             <li class=""><a href="research.html">Research</a></li>
                             <li class=""><a href="services-facilities.html">Facilities & services</a></li>
                             <li class=""><a href="student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/computer-science-software-engineering/news.html">News & events</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/computer-science-software-engineering/contact.html">Contact us</a></li></ul> 
+                            <li class=""><a href="news.html">News & events</a></li>
+                            <li class=""><a href="contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -829,7 +829,7 @@ S-EV 3.152, ext. 3043</p>
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -859,4 +859,26 @@ S-EV 3.152, ext. 3043</p>
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                                                      

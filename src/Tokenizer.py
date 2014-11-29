@@ -9,5 +9,6 @@ def tokenise(text):
                 replace('\\', ' ').replace('[', ' ').replace(']', ' ').\
                 replace('{', ' ').replace('}', ' ').replace('=', ' ').\
                 replace('~', ' ').replace('=', ' ').replace('^', ' ').\
-                replace('&', ' ').replace('$', ' ')
+                replace('&', ' ').replace('$', ' ').replace('*', ' ').\
+                replace('#', ' ')
 	return text.split()

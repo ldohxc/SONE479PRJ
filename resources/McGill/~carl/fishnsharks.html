@@ -11,3 +11,255 @@ alpha)[Netwscape]">
 <table><tr><td valign=left align=top><img src="http://www.cs.mcgill.ca/gifs/pixel.gif" height="1" width="110" alt=""></td>
 <td valign=left align=top width=100%>
 <img src="http://www.cs.mcgill.ca/gifs/mcgillbanner.gif" alt="McGill University" height="48" width="170">
+<br>
+<font color="#ff0000">
+<font size=+4><b>School of Computer Science</b></font>
+</font>
+<br>
+<h1>Computer Science 308-767:
+Parallel Programming
+</h1>
+<BR>
+<h1><B>Life and death in the ocean: fish and sharks (WATOR)
+</B></h1>
+<br>
+</td></tr></table>
+</body>
+</html>
+<p>
+ In this assignment we are going  to seek dynamical load balancing in a
+problem that involves synchronous computation: our program must wait for
+all the processors to finish each step, because the global result of
+each step is needed for the next (this is very typical of physical
+models whenever there is time ticking). 
+<p>The problem involves a simple  model of population
+dynamics studied in ecology. This model became famous
+after it was presented in the Computer Recreations column of Scientific
+American [A. K. Dewdney, Sharks and fish wage an ecological
+war on the toroidal planet Wator, Scientific American,
+December 1984]. Wator is a toroidal (donut-shaped) planet, entirely
+covered by a warm ocean. The ocean is inhabited by predators (sharks)
+and prey (fish), and it is represented by a rectangular matrix: each
+element of the matrix corresponds to a location in the ocean, which can
+be empty, contain exactly one fish, or contain exactly one shark. Time
+is also subdivided in standard units, known as chronons. 
+<p>This is how we
+model the behavior of predator and prey:
+<ul>
+ <li>Sharks eat and move. At each step, a shark will look around in all
+the adjacent (nearest neighbor ) cells, and eat a fish if it finds one
+there; then the shark will move to the space previously occupied by the
+fish. If the shark cannot find any fish, it will move into one of the
+empty adjacent cells, if there any. [In a rectangular matrix, the
+nearest-neighbor elements are those whose first or second index (but not
+both) differ by exactly one.
+</li><br>
+ <li> Sharks breed and die. If a shark survives for Sb or more chronons,
+it will breed: if an empty adjacent cell is available, a new shark will
+appear there. The parent will breed again after Sb chronons. However, if
+a shark has not eaten after Sd chronons, it will die (disappear from the
+grid).</li><br>
+ <li>Fish move. At each step, each fish will move at random into one of
+the free adjacent cells, if there are any. Since Wator is toroidal, fish
+(and sharks) can swim out of one edge of the matrix, and come back from
+the opposite edge</li><br>
+ <li>Fish breed. If a fish survives for Fb chronons or more, it will
+breed: if an empty adjacent cell is available, a new fish will appear
+there. The parent will breed again after Fb chronons</li><br>
+ <li>Initial population. At the beginning of the simulation, the grid
+should be filled up randomly with NS sharks and NF fish. Their breeding
+and starving ages can all be set to zero</li><br>
+<li>Random movement. Whenever a shark or fish can choose to operate
+(move, eat, spawn) in more than one direction, it should do so
+randomly</li>
+</ul>
+<p>
+These rules are sufficient to create a simple model of predator-prey
+interaction that displays a behavior similar to that observed in some
+populations in nature. . When there are enough fish to go around, the sharks can prosper and
+breed: but if the number of sharks grows too large, they will eat most of
+the fish and a famine will ensue. 
+<p>In this assignment, you are going to
+write a parallel program that implements the Wator model by subdividing
+(dynamically, for load-balancing purposes) the rectangular matrix that
+represents the ocean between the parallel processors. 
+<br>
+<h2>The Assignment</h2>
+<ul>
+<li> Using C/C++, write a serial (one-processor) version of the Wator
+model, which should take as parameters the dimension of the ocean
+matrix, plus NS, NF , Sb, Sd, Fb, as parameters. Wator is in a loose
+sense a cellular automaton. 
+See the Implementation Notes below for some suggestions
+about program and data structure. The program should print (and perhaps
+graph) an evolving tally of the populations of sharks and fish in the
+ocean </li><br>
+
+ <li>Try out the program on a 100 by 100 grid, using NS = 500, NF =
+5000, Sb = 10, Ss = 3, Fb = 3. Plot out the total number of sharks and
+fish for a reasonably long time (a few thousands of chronons?) Try
+changing the parameters and see how the result changes. Can you get into
+an ecological catastrophe where only fish or only sharks
+remain?</li><br>
+
+ <li> Parallelize the program. Implement this on a cluster using MPI.
+Begin by subdividing the ocean matrix into rectangular sections, in a
+static fashion, among the parallel processors. To simplify the logic of
+your code, use thin sections that span the entire vertical extent of the
+ocean. Each processor will be running the same modified version of the
+serial Wator program, but you will need to write special code to deal
+with the boundaries between regions evolved by different processors (see
+the Implementation Notes below). The root processor should periodically
+collect copies of the sections, print out fish and shark counts, and, if
+possible, visualize the state of the ocean. Try out the parallel program
+on a large grid (say, several hundred by several hundred) with eight
+ CPUs, and estimate the speedup factor with respect to the serial
+version. When comparing speeds, disable the graphical display of the
+ocean.</li><br>
+ <li> Now include load balancing. Since the computational load of each
+processor is roughly proportional to the number of the sharks and fish
+in its subdomain, you can repartition the ocean dynamically among the
+processors so that each gets approximately the same number of live
+animals. This is best done by the root processor, on the basis of
+per-column shark and fish counts. You do not want to repartition too
+often, since each such action will involve considerable overhead,
+including the communication between the processors to transfer the
+content of cells, and the reallocation of the ocean and animal data
+structures. Try out the load-balanced program on a large grid, and track
+the improvement in execution speed (with respect to the statically
+partitioned version) for different implementation choices</li><br>
+<p>
+<b> Implementation Notes:Serial program</b>>
+ While you are coding the serial
+version of the Wator simulation, you should pay attention to
+implementing the evolution logic correctly, and to leaving some
+flexibility in the data structures, so that you will be able to adapt
+them to the dynamical domain-decomposition scheme used in the final
+parallel version. Using object-oriented design principles can be very
+helpful for this purpose. Otherwise, here are some issues that come to
+mind. 
+<p>
+Data structures: The animal content of your xsize Ã ysize ocean
+elements can be represented by a two-dimensional matrix of integers
+ocean[xsize][ysize], holding (for instance) 0 to represent empty cells,
+1 for fish, and 2 for sharks. You can allocate additional matrices (say,
+sfeed[xsize][ysize], sbreed[xsize][ysize], and fbreed[xsize][ysize]) to
+hold the feeding and breeding counts. Remember that you need to shifts
+these counts around with the animals when they move.
+<p>
+Initial populations: Populate your initial ocean matrix by laying down
+the required number of fish and then sharks in random locations
+generated using rand(). If the particular location chosen at random for
+a new animal is already taken, generate another location, and try again.
+Then initialize the breeding and starving matrices to zero.
+<p>
+ Evolution: Small changes in the details of your evolution algorithm
+(such as deciding whether all the sharks move before all the fish, or
+whether the animals breed first or move first) should not make a big
+difference in the qualitative behavior of your simulation, although they
+might change slightly the significance of the parameters Sb, Sd, Fb.
+However, you want to avoid illegal steps such as moving the same animal
+twice, or replicating a fish that has already been eaten. This might be
+easier if you keep two ocean matrices, one for the old configuration and
+one (newocean) for the new configuration. 
+<p>
+Boundaries: Since the Wator world is doubly periodical, your code should
+know when ocean[i+1][j] is actually on the other side of the grid. In C,
+you can use macros such as #define OCEAN(i,j) ocean[i % XSIZE][j %
+YSIZE] assuming your cell indices run from 0 to XSIZE and YSIZE. In C++,
+you should probably define an Ocean class with appropriate methods to
+access cells. Perhaps you could even overload operator() to return a
+reference (int&) to the integer representing a cell; you could then use
+calls like myOcean(i,j) = 0.
+<p>
+<b> Implementation Notes: parallel program</b> Once you are satisfied that your
+serial Wator is running correctly, you can move on to the parallel
+version. This means adding all the MPI messaging logic, and modifying
+data structures accordingly. It might make sense to leave the root
+processor with the only task of coordinating the other n processors,
+which actually evolve the sections of the ocean. This will reduce the
+parallel speedup of your program, since the root processor will probably
+be underused, but it should simplify the MPI logic considerably.
+<p>
+ Static domain decomposition: In this version of the program, each
+processor stores only a section of the ocean ocean[(XSIZE/n)+2][YSIZE],
+where n is the number of processors that share the ocean. The horizontal
+extent is slightly larger than needed, because you will need to obtain
+(and store) information about the columns that sit just outside the
+domain of each processor. This is because for some of the cells to be
+evolved by each processor, the nearest neighbors are actually stored by
+the processor on the right (or on the left). The simplest way to
+organize data exchange is the following. Before each iteration of the
+evolution algorithm, each processor copies (through messaging)
+(ocean[XSIZE/n][. . .])
+(ocean[XSIZE/n][. . .])left neighbor (ocean[0][. .
+.])local, (ocean[1][. . .])(ocean[XSIZE/n + 1][. . .]); 
+<p>
+the processor then evolves the bulk of its ocean array (i.e., ocean[1 .
+. . XSIZE/n][. . .], using the nearestneighbor information about the
+animals now present in ocean[0][. . .] and ocean[XSIZE/n + 1][. . .],
+and moving animals there if needed. At the end of the evolution step,
+the processors will need to exchange information with the neighboring
+processors, to let them know if any animal has crossed the boundary. You
+will need to implement some kind of conflict resolution algorithm. One
+example of conflict happens if two processors move an animal to the same
+cell, or if a processor moves a shark across the boundary to eat a fish
+that has been moved in the meantime (the second problem is avoided by
+moving all the sharks first, and then communicating their positions
+before evolving the fish). However, do not lose much time on this: go
+for a simple scheme, even if it breaks the Wator rules given above.
+<p>
+ Dynamical domain decomposition: In this version of the program, you must
+be able to change the horizontal extent of the ocean array, by removing
+columns at the left or right end, or by adding columns. There are many
+ways to achieve this. One way is to reallocate the storage when it
+changes size. Although you might be tented to pass the data content of
+the columns being shifted using direct messages between neighboring
+processors, this organization seems to invite a very complicated
+messaging logic. It is more straightforward to have root collect
+(MPI_Gather) the contents of the data structures from all the
+processors, and then distribute it out in such a way that each processor
+gets the same number of animals. Be very formal in defining what kind of
+messages will be sent at what step in your program; differentiate
+messages by their MPI tags, and make sure that the receiver knows how
+much data to expect for each exchange. 
+<p>
+Your assignment should be submitted in two parts:
+<ul>
+<li>
+A tar file containing a separate directory for each of your
+programs. Each directory should contain your source code and a
+Makefile.
+</li>
+<li>Your writeup about the programs. 
+</li>
+</ul>
+<p>Email me a message with a text attachment containing the program and a
+second attachment containing your writeup (in either Word or pdf
+format). 
+<h2>Grading Criteria</h2>
+<ul>
+<li>
+10% Program correctness. 
+</li>
+<li>
+40% Program clarity, elegance and parallelization. The programs should
+be well-documented internally with comments.
+</li>
+<li>
+10% Program scalability and performance.
+</li>
+<li>
+40% Writeup. Your grade on the writeup includes the quality of the
+writing, whether all of
+the required elements are included, and the clarity of your
+explanations. 
+</li>
+</ul>
+<h2>Due Date</h2>
+Friday, October 7,2007 
+<hr />
+</body>
+</html>
+
+

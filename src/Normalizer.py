@@ -7,6 +7,7 @@ def cleanUp(token):
 	frontAt = re.compile('^@.*')
 	frontDash = re.compile('^\-.*')
 	frontDoubleDash = re.compile('^\-\-.*')
+	frontPrecentage = re.compile('^\%.*')
 	endWithDot = re.compile('^[^\.]*\.$')
 	endWithComma = re.compile('.*,$')
 	endWithApostrophe = re.compile('.*\'$')
@@ -27,6 +28,9 @@ def cleanUp(token):
 		token = token[2:]
 			
 	if frontDash.match(token):
+		token = token[1:]
+		
+	if frontPrecentage.match(token):
 		token = token[1:]
 		
 	if endWithComma.match(token):

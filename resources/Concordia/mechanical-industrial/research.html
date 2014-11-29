@@ -1942,7 +1942,7 @@
                             <li class=""><a href="research.html">Research</a></li>
                             <li class=""><a href="facilities-services.html">Facilities & services</a></li>
                             <li class=""><a href="student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/mechanical-industrial/news.html">News & Events</a></li>
+                            <li class=""><a href="news.html">News & Events</a></li>
                             <li class=""><a href="contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
@@ -1963,8 +1963,8 @@
     
         <ul class="">
                             <li class=""><a href="http://www.concordia.ca/admissions.html">Admissions</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/mechanical-industrial/students/undergraduate.html">Current Undergraduate Students</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/mechanical-industrial/students/graduate.html">Current Graduate Students</a></li>
+                            <li class=""><a href="students/undergraduate.html">Current Undergraduate Students</a></li>
+                            <li class=""><a href="students/graduate.html">Current Graduate Students</a></li>
                             <li class=""><a href="http://www.concordia.ca/encs/student-life/sas.html">Student Academic Services</a></li>
                             <li class=""><a href="about/jobs.html">Job Opportunities</a></li></ul> 
 </div></div>
@@ -2053,7 +2053,7 @@
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -2083,4 +2083,26 @@
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>

@@ -253,7 +253,7 @@
                                     <div class="dropdown-menu">
                                         <ul>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/info-systems-eng/about/faculty.html">
+                                                    <a tabindex="-1" href="../about/faculty.html">
                                                         Faculty members
                                                     </a>
                                                 </li>
@@ -320,17 +320,17 @@
     
                     <li class="dropdown ">
                         
-                            <a href="http://www.concordia.ca/encs/info-systems-eng/research.html" role="button" class="dropdown-toggle" data-toggle="">Research</a>
+                            <a href="../research.html" role="button" class="dropdown-toggle" data-toggle="">Research</a>
                             <div>
                                     <div class="dropdown-menu">
                                         <ul>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/info-systems-eng/research/researchers.html">
+                                                    <a tabindex="-1" href="../research/researchers.html">
                                                         Researchers
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/info-systems-eng/research/funding.html">
+                                                    <a tabindex="-1" href="../research/funding.html">
                                                         Funding &amp; grants
                                                     </a>
                                                 </li>
@@ -341,17 +341,17 @@
     
                     <li class="dropdown ">
                         
-                            <a href="http://www.concordia.ca/encs/info-systems-eng/facilities-services.html" role="button">Facilities &amp; services</a>
+                            <a href="../facilities-services.html" role="button">Facilities &amp; services</a>
                     </li>
     
                     <li class="dropdown ">
                         
-                            <a href="http://www.concordia.ca/encs/info-systems-eng/student-life.html" role="button" class="dropdown-toggle" data-toggle="">Student life</a>
+                            <a href="../student-life.html" role="button" class="dropdown-toggle" data-toggle="">Student life</a>
                             <div>
                                     <div class="dropdown-menu">
                                         <ul>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/info-systems-eng/student-life/associations.html">
+                                                    <a tabindex="-1" href="../student-life/associations.html">
                                                         Student &amp; Professional Associations
                                                     </a>
                                                 </li>
@@ -778,7 +778,7 @@ Special Permission must be obtained from the Concordia Institute for Information
 <td valign="bottom">Feb. 1</td>
 </tr><tr height="37"><td valign="bottom"><b>Computer Science</b></td>
 <td valign="bottom">MACompSc /<br>
-MCompSc// PhD</td>
+MCompSc⬯/ PhD</td>
 <td valign="bottom">June 1</td>
 <td valign="bottom">Oct. 1</td>
 <td valign="bottom">Feb. 1</td>
@@ -1105,11 +1105,11 @@ jQuery('document').ready(function() {
         <ul class="">
                             <li class=""><a href="../about.html">About</a></li>
                             <li class=""><a href="../programs.html">Programs</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/research.html">Research</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/facilities-services.html">Facilities & Services</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/news.html">News & Events</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/contact.html">Contact us</a></li></ul> 
+                            <li class=""><a href="../research.html">Research</a></li>
+                            <li class=""><a href="../facilities-services.html">Facilities & Services</a></li>
+                            <li class=""><a href="../student-life.html">Student life</a></li>
+                            <li class=""><a href="../news.html">News & Events</a></li>
+                            <li class=""><a href="../contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -1128,7 +1128,7 @@ jQuery('document').ready(function() {
         <b>Quick links</b>    
     
         <ul class="">
-                            <li class=""><a href="http://www.concordia.ca/encs/info-systems-eng/students.html">Current students</a></li></ul> 
+                            <li class=""><a href="../students.html">Current students</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -1215,7 +1215,7 @@ jQuery('document').ready(function() {
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>� Concordia University</li> 
+        <ul class="nav pull-right"><li>© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -1245,4 +1245,26 @@ jQuery('document').ready(function() {
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  

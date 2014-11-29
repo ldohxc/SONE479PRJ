@@ -557,7 +557,7 @@
 <div class="rte">
 <ul>
 <li><a adhocenable="false" target="_blank" href="http://fcms.concordia.ca/fcms/asc002_stud_all.aspx">Class schedule</a></li>
-<li><a adhocenable="false" href="http://www.concordia.ca/academics/graduate/calendar/current/encs/enineering-courses.html">Engineering course descriptions</a></li>
+<li><a adhocenable="false" href="http://www.concordia.ca/academics/graduate/calendar/current/encs/engineering-courses.html">Engineering course descriptions</a></li>
 <li><a adhocenable="false" target="_blank" href="http://www.concordia.ca/content/dam/encs/mie/docs/graduate/MIE_ADD_DROP_FORM.pdf.PDF">Course change form</a>: Drop/Add</li>
 <li><a adhocenable="false" href="http://www.concordia.ca/content/dam/concordia/offices/sgs/docs/forms/independentregistration.pdf">Authorization to Register as a Non-Degree Student (Independent/Visiting)</a></li>
 <li>Verify course registration: <a adhocenable="false" target="_blank" href="https://www.myconcordia.ca/">MyConcordia Portal</a></li>
@@ -957,7 +957,7 @@ jQuery('document').ready(function() {
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -987,4 +987,26 @@ jQuery('document').ready(function() {
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                

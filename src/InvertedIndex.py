@@ -44,7 +44,6 @@ def parseSingleHtml(filePath, invertedIndex):
         # Construct a id for each html page
         prefix = filePath.split('/')[2]
         pageFolderPath = '/'.join(filePath.split('/')[3:])
-        print pageFolderPath
         #
         newInvertedIndex = appendAllTokens(prefix, content, invertedIndex)
         # Store the page content in one file for sentiment analysis
@@ -204,7 +203,7 @@ def main():
         
     print "Start constructing inverted index"
     
-    resourcesPath = '../resources/McGill'
+    resourcesPath = '../resources/McGillAlt'
     invertedIndex = {}  
     prefix = resourcesPath.split('/')[2]
     

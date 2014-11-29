@@ -719,7 +719,7 @@ On the job experience</h2>
 	           Co-operative education bridges university life and the working world. This model of experiential learning, offered through the Department of Electrical & Computer Engineering and the Institute for Co-operative Education, is proven to give students a competitive edge. 
 	       	        
 	        <div class="clearfix">
-	            <a class="btn btn-small bg-dark-grey" href="http://www.concordia.ca/encs/electrical-computer/programs/co-op.html">Learn more about Co-op programs</a>
+	            <a class="btn btn-small bg-dark-grey" href="programs/co-op.html">Learn more about Co-op programs</a>
 	        </div>
 	    
 	    </div>
@@ -1001,7 +1001,7 @@ H3G 2W1</div>
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -1031,4 +1031,26 @@ H3G 2W1</div>
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                                                                                                                                                                     

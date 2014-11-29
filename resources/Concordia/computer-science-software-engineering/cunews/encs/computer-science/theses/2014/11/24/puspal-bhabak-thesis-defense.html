@@ -602,7 +602,7 @@ GraniteClientLibraryManager.write([{"p":"/etc/clientlibs/foundation/shared.min.j
 <p><b>Time</b>: 10:00 a.m.</p>
 <p><b>Place</b>: EV 1.162</p>
 <p><b>ABSTRACT</b></p>
-<p>Broadcasting is an information dissemination problem in a connected network in which one node, called the originator, must distribute a message to all other nodes by placing a series of calls along the communication lines of the network. Every time the informed nodes aid the originator in distributing the message. Finding the minimum broadcast time of any vertex in an arbitrary graph is NP-complete. The problem remains NP-Complete even for planar graphs of degree 3 and for a graph whose vertex set can be partitioned into a clique and an independent set. The best theoretical upper bound gives logarithmic approximation. It has been shown that the broadcast time cannot be approximated within a factor of 3  [. The polynomial time solvability is shown only for tree-like graphs; trees, unicyclic graphs, tree of cycles, necklace graphs and some graphs where the underlying graph is a clique; such as fully connected trees and tree of cliques. In this thesis we study the broadcast problem in different classes of graphs where cycles intersect in at least one vertex.&nbsp;</p>
+<p>Broadcasting is an information dissemination problem in a connected network in which one node, called the originator, must distribute a message to all other nodes by placing a series of calls along the communication lines of the network. Every time the informed nodes aid the originator in distributing the message. Finding the minimum broadcast time of any vertex in an arbitrary graph is NP-complete. The problem remains NP-Complete even for planar graphs of degree 3 and for a graph whose vertex set can be partitioned into a clique and an independent set. The best theoretical upper bound gives logarithmic approximation. It has been shown that the broadcast time cannot be approximated within a factor of 3 âÆ É:. The polynomial time solvability is shown only for tree-like graphs; trees, unicyclic graphs, tree of cycles, necklace graphs and some graphs where the underlying graph is a clique; such as fully connected trees and tree of cliques. In this thesis we study the broadcast problem in different classes of graphs where cycles intersect in at least one vertex.&nbsp;</p>
 <p>First we consider broadcasting in a simple graph where several cycles have common paths and two intersecting vertices, called a k-path graph. We present a constant approximation algorithm to find the broadcast time of an arbitrary k-path graph. We also study the broadcast problem in a simple cactus graph called k-cycle graph where several cycles of arbitrary lengths are connected by a central vertex on one end. We design a constant approximation algorithm to find the broadcast time of an arbitrary k-cycle graph.</p>
 <p>Next we study the broadcast problem in a hypercube of trees for which we present a 2-approximation algorithm for any originator. We provide a linear algorithm to find the broadcast time in hypercube of trees with one tree. We extend the result for any arbitrary graph whose nodes contain trees and design a linear time constant approximation algorithm.</p>
 
@@ -830,7 +830,7 @@ GraniteClientLibraryManager.write([{"p":"/etc/clientlibs/foundation/shared.min.j
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -860,4 +860,27 @@ GraniteClientLibraryManager.write([{"p":"/etc/clientlibs/foundation/shared.min.j
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>
+    </div>
+
+</body>
+</html>

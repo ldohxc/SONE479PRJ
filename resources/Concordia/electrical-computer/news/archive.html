@@ -1123,9 +1123,9 @@
 
 <li class="span3 ">
     <a class="c-vignette-2" href="http://www.concordia.ca/encs/electrical-computer/news/archive/cunews/encs/2012/03/30/visit-from-hydro-quebec.html">
-        <img class="media-object" src="http://www.concordia.ca/content/shared/en/news/encs/2012/03/30/visit-from-hydro-quebec.img.png/1406821162598.jpg" alt="Visit from Hydro-Québec ">
+        <img class="media-object" src="http://www.concordia.ca/content/shared/en/news/encs/2012/03/30/visit-from-hydro-quebec.img.png/1406821162598.jpg" alt="Visit from Hydro-QuÃ©bec ">
         <div class="box">
-            <div class="title">Visit from Hydro-Québec </div>
+            <div class="title">Visit from Hydro-QuÃ©bec </div>
             
             <div class="date">March 30, 2012</div>
             
@@ -1337,7 +1337,7 @@ H3G 2W1</div>
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -1367,4 +1367,26 @@ H3G 2W1</div>
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                              

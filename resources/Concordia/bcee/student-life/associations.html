@@ -352,7 +352,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="">
-                                                    <a tabindex="-1" href="http://www.concordia.ca/encs/bcee/student-life/scholarships-awards.html">
+                                                    <a tabindex="-1" href="scholarships-awards.html">
                                                         Scholarships &amp; awards
                                                     </a>
                                                 </li>
@@ -602,7 +602,7 @@
 <li><a href="http://www.csce.ca/" target="_blank" adhocenable="false">Canadian Society for Civil Engineering</a> (CSCE)</li>
 <li><a href="http://www.aaceimontreal.org/" target="_blank" adhocenable="false">Association for the Advancement of Cost Engineering</a> (AACE)</li>
 <li><a href="http://www.ashrae.org/" target="_blank" adhocenable="false">American Society of Heating, Refrigerating and Air Conditioning Engineers</a> (ASHRAE)</li>
-<li><a href="http://www.oiq.qc.ca/" target="_blank" adhocenable="false">Ordre des ingénieurs du Quebec</a> (OIQ)</li>
+<li><a href="http://www.oiq.qc.ca/" target="_blank" adhocenable="false">Ordre des ingÃ©nieurs du Quebec</a> (OIQ)</li>
 <li><a href="http://www.ccpe.ca/" target="_blank" adhocenable="false">The Canadian Council of Professional Engineers</a> (CCPE)</li>
 <li><a href="http://www.cite7.org/" target="_blank" adhocenable="false">Canadian Institute of Transportation Engineers</a> (CITE)</li>
 </ul>
@@ -722,8 +722,8 @@
                             <li class=""><a href="../research.html">Research</a></li>
                             <li class=""><a href="../facilities-services.html">Facilities & Services</a></li>
                             <li class=""><a href="../student-life.html">Student life</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/bcee/news.html">News & Events</a></li>
-                            <li class=""><a href="http://www.concordia.ca/encs/bcee/contact.html">Contact us</a></li></ul> 
+                            <li class=""><a href="../news.html">News & Events</a></li>
+                            <li class=""><a href="../contact.html">Contact us</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -742,7 +742,7 @@
         <b>Quick links</b>    
     
         <ul class="">
-                            <li class=""><a href="http://www.concordia.ca/encs/bcee/students.html">Current students</a></li></ul> 
+                            <li class=""><a href="../students.html">Current students</a></li></ul> 
 </div></div>
 </div>
 </div>
@@ -829,7 +829,7 @@
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -859,4 +859,26 @@
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                                                                                                                            

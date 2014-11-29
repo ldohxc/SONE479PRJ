@@ -582,7 +582,7 @@
 
 <div class="rte">
 <p><b>ENGR 412<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Honours Research Project</i></b> (3&nbsp;credits)</p>
-<p>Prerequisite: ENCS 282; minimum 75 credits in the BEng program with a CGPA of 3.00 or better; permission of the Department. Students work on a research project in their area of concentration, selected in consultation with and conducted under the supervision of a faculty member of the Department. The students work must culminate in a final report, as well as an oral presentation. Students planning to register for this course should consult with the Department prior to term of planned registration. Intended for students with potential interest in graduate programs.<br>
+<p>Prerequisite: ENCS 282; minimum 75 credits in the BEng program with a CGPA of 3.00 or better; permission of the Department. Students work on a research project in their area of concentration, selected in consultation with and conducted under the supervision of a faculty member of the Department. The studentâ¬"s work must culminate in a final report, as well as an oral presentation. Students planning to register for this course should consult with the Department prior to term of planned registration. Intended for students with potential interest in graduate programs.<br>
 <i> NOTE: Must be approved by the Department prior to registration.</i></p>
 
 </div></div>
@@ -751,7 +751,7 @@ jQuery('document').ready(function() {
 <a href="../../facilities.html" adhocenable="false">Facilities &amp; services<br>
  </a><a href="../../student-life.html" adhocenable="false">Student life<br>
  </a><a href="../../news.html" adhocenable="false">News &amp; events<br>
- </a><a href="http://www.concordia.ca/encs/contact.html" adhocenable="false">Contact</a></p>
+ </a><a href="../../contact.html" adhocenable="false">Contact</a></p>
 
 </div></div>
 </div>
@@ -846,7 +846,7 @@ jQuery('document').ready(function() {
 
     <div class="c-bloc-links ">
 
-        <ul class="nav pull-right"><li>© Concordia University</li> 
+        <ul class="nav pull-right"><li>Â© Concordia University</li> 
                             <li class=""><a href="http://www.concordia.ca/web/terms.html">Terms</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/privacy.html">Privacy</a></li>
                             <li class=""><a href="http://www.concordia.ca/web/accessibility.html">Accessibility</a></li></ul> 
@@ -876,4 +876,26 @@ jQuery('document').ready(function() {
         <ul>
         
             <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-bad-link.html">I want to report a bad link</a></li>
-            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">
+            <li><a href="http://www.concordia.ca/web/feedback-forms/feedback-cant-find.html">I can't find something on the website</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+$=jQuery;
+$(function() {
+    var check = mobilecheck();
+    if (!check) {
+        $("#feedback-modal").attr("href", "#modal");
+        $('a[rel*=leanModal]').leanModal({top: 200, closeButton: ".modal-close"});
+    }
+});
+</script>
+</div>
+
+	
+</footer>        
+    </div>
+</body>
+</html>                                              
